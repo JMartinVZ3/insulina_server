@@ -40,10 +40,6 @@ const googleSignUp = async(req, res) => {
             "name": name,
         });
 
-        // Encriptar contraseña
-        const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync(password, salt);
-
         await user.save();
 
         // Generar mi JWT

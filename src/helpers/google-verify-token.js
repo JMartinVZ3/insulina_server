@@ -1,6 +1,6 @@
 const { OAuth2Client } = require('google-auth-library');
 
-const CLIENT_ID = "125698844710-hlk73b0v0541g5dejkv0rdt07s8c0e6j.apps.googleusercontent.com";
+const CLIENT_ID = "975571153466-cc0le9shvit4llbpqdm8qd7hsr0uf8c2.apps.googleusercontent.com";
 
 const client = new OAuth2Client(CLIENT_ID);
 
@@ -10,7 +10,7 @@ const validateGoogleIdToken = async (token) => {
 
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: [CLIENT_ID, "125698844710-v15ktn81svthdplq2h2fsmlfe24fbj6t.apps.googleusercontent.com", "125698844710-o4mhgugttpufadrr8n6hq6coblh80d36.apps.googleusercontent.com"], 
+            audience: [CLIENT_ID, "975571153466-cc0le9shvit4llbpqdm8qd7hsr0uf8c2.apps.googleusercontent.com", "975571153466-46uhjl2ltrhejb5ibjjsg79ft9tsva33.apps.googleusercontent.com"], 
         });
         const payload = ticket.getPayload();
         
