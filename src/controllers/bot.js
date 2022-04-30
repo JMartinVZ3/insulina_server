@@ -1,4 +1,6 @@
 const OpenAI = require('openai-api');
+const Message = require('../models/message');
+
 const { response } = require('express');
 
 // Load your key from an environment variable or secret management service
@@ -28,6 +30,8 @@ const getCompletion = async (req, res = response) => {
 
     try {
 
+        const {text, userId} = req.body;
+
         let prompt =`La siguiente es una conversación entre un niño y un ajolote. El ajolote es sabio en el ambito de la salud, especialmente diabetes, es atento, cariñoso y cortés\n\
 
         Niño: Holaa\n\
@@ -38,7 +42,13 @@ const getCompletion = async (req, res = response) => {
         Ajolote: Tal vez sea tu nivel de azúcar en sangre\n\
         `;
 
-        const { text } = req.body;
+        const message = new Message({
+            "from": userId,
+            "to": "chatbot",
+            "text": text
+
+        });
+        await message.save();
 
         console.log(`${text}`);
 
@@ -75,10 +85,18 @@ const getCompletion = async (req, res = response) => {
 
         const data = gptResponse.data;
 
-        res.json({
-            data
 
-        })
+        const message2 = new Message({
+            "from": "chatbot",
+            "to": userId,
+            "text": data.choices[0].text.trim().replace("Ajolote: ",'')
+        });
+        await message2.save();
+
+        return res.json({
+            data
+        });
+
 
     } catch(error) {
 

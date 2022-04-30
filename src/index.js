@@ -20,6 +20,7 @@ const server = require('http').createServer(app);
 app.use('/api/v1/login', require('./routes/auth'));
 app.use('/api/v1/users', require('./routes/users'));
 app.use('/api/v1/bot', require('./routes/bot'));
+app.use('/api/v1/messages', require('./routes/messages'));
 
 server.listen(process.env.PORT, (err) => {
 
