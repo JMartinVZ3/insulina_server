@@ -5,7 +5,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { crearUser, login, renewToken} = require('../controllers/auth');
+const { crearUser, login, renewToken, googleSignIn, googleSignUp} = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
